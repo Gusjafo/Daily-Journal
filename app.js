@@ -53,14 +53,10 @@ app.post('/compose', function(req, res) {
 
 app.get('/post/:newPage', function(req, res){
 
-  posts.forEach(function(newPost){
-    const storedTitle = newPost.title;
-    console.log(storedTitle);
-    console.log(newPost.title);
-
-    if (req.params.newPage === storedTitle){
+  posts.forEach(function(newElement){
+    if (req.params.newPage === newElement.title){
       console.log("match found");
-    } else {console.log("wrong");};
+    }
   })
 })
 
