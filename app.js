@@ -3,7 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var kebabCase = require('lodash.kebabcase');
+// var kebabCase = require('lodash.kebabcase');
 const _ = require('lodash');
 
 
@@ -55,13 +55,16 @@ app.post('/compose', function(req, res) {
 })
 
 app.get('/post/:newPage', function(req, res) {
+  const pageName = _.kebabCase(req.params.newPage);
+  console.log(pageName);
   posts.forEach(function(newElement) {
-    const pageName = _.kebabCase(req.params.newPage);
     const elementName = _.kebabCase(newElement.title);
-    console.log(pageName);
     console.log(elementName);
     if (pageName === elementName) {
-      console.log("match found");
+      res.render('post', {
+        title: newElement.title,
+        area: newElement.area
+      })
     }
   })
 })
